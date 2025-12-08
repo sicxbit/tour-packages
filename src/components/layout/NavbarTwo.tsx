@@ -115,7 +115,7 @@ const Navbar: React.FC<NavMenuProps> = ({ navigationItems }) => {
             </Link>
           ))}
           <Link
-            href="#"
+            href="/signup"
             className="font-medium text-lg text-yellow-500 hover:text-yellow-600 transition-colors duration-300"
             onClick={() => setMenuOpen(false)}
           >
