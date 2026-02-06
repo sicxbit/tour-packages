@@ -3,25 +3,25 @@ import Image from "next/image";
 const travelPlans = [
   {
     day: "DAY 01",
-    description: "Lorem Ipsum is simply dummy text.",
+    description: "Blue Lagoons curated experience.",
   },
   {
     day: "DAY 02",
-    description: "Lorem Ipsum is simply dummy text.",
+    description: "Blue Lagoons curated experience.",
     imageSrc: "/assets/imgs/banner/book3.png",
-    extra: ["Lorem Ipsum is simply dummy text.", "Lorem Ipsum is simply dummy text."],
+    extra: ["Blue Lagoons curated experience.", "Blue Lagoons curated experience."],
   },
   {
     day: "DAY 03",
-    description: "Lorem Ipsum is simply dummy text.",
+    description: "Blue Lagoons curated experience.",
   },
   {
     day: "DAY 04",
-    description: "Lorem Ipsum is simply dummy text.",
+    description: "Blue Lagoons curated experience.",
   },
   {
     day: "DAY 05",
-    description: "Lorem Ipsum is simply dummy text.",
+    description: "Blue Lagoons curated experience.",
   },
 ];
 

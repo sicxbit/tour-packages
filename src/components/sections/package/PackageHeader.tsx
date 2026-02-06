@@ -8,7 +8,7 @@ export default function PackageHeader() {
 
       <div className="relative z-10 container mx-auto px-4 sm:px-8 md:px-12 lg:px-20 xl:px-32">
         <h1 className="font-montserrat font-semibold text-6xl text-black pt-10">
-          Lorem <span className="text-[#ffe500]">Ipsum</span>
+          Blue Lagoons <span className="text-[#ffe500]">Retreat</span>
         </h1>
         <p className="mt-4 text-2xl font-semibold text-black">
           4 Nights, 5 Days

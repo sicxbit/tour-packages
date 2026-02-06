@@ -5,7 +5,7 @@ export default function AboutSection() {
     {
       title: "Competitive Prices",
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "Blue Lagoons creates curated island itineraries with trusted local partners, transparent planning, and smooth booking from start to finish.",
     },
     {
       title: "Expert Guidance",
@@ -52,8 +52,8 @@ export default function AboutSection() {
                   <span className="primary-color">We Are?</span>
                 </h3>
                 <p className="text-lg text-gray-200 leading-relaxed">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                  Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.
+                  Blue Lagoons delivers thoughtfully planned island experiences. 
+                  Blue Lagoons helps travelers discover coastlines, culture, and comfort in one seamless trip.
                 </p>
               </div>
 
@@ -63,8 +63,8 @@ export default function AboutSection() {
                   <span className="primary-color">Mission</span>
                 </h3>
                 <p className="text-lg text-gray-200 leading-relaxed">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                  Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.
+                  Blue Lagoons delivers thoughtfully planned island experiences. 
+                  Blue Lagoons helps travelers discover coastlines, culture, and comfort in one seamless trip.
                 </p>
               </div>
             </div>

@@ -1,8 +1,8 @@
 const excludesItems = [
-  "Lorem Ipsum is simply dummy text.",
-  "Lorem Ipsum is simply dummy text.",
-  "Lorem Ipsum is simply dummy text.",
-  "Lorem Ipsum is simply dummy text.",
+  "Blue Lagoons curated experience.",
+  "Blue Lagoons curated experience.",
+  "Blue Lagoons curated experience.",
+  "Blue Lagoons curated experience.",
 ];
 
 export default function PackageExcludes() {
