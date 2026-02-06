@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { motion } from "motion/react";
-import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 type NavItem = {
@@ -16,7 +14,6 @@ interface NavMenuProps {
 }
 
 const Navbar: React.FC<NavMenuProps> = ({ navigationItems }) => {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -41,31 +38,27 @@ const Navbar: React.FC<NavMenuProps> = ({ navigationItems }) => {
           TRAVEL
         </Link>
 
-        <div className="hidden md:flex items-center gap-2 rounded-full border border-white/30 bg-white/10 p-2 backdrop-blur-xl">
-          {navigationItems.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="relative rounded-full px-4 py-2 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300"
-                style={{ fontFamily: "Montserrat, Helvetica" }}
-              >
-                {isActive && (
-                  <motion.span
-                    layoutId="navbar-pill"
-                    transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
-                    className="absolute inset-0 rounded-full border border-white/40 bg-white/25 shadow-md backdrop-blur-md"
-                  />
-                )}
-                <span className={`relative z-10 ${scrolled ? "text-gray-900" : "text-white"}`}>{item.label}</span>
-              </Link>
-            );
-          })}
+        <div className="hidden md:flex items-center space-x-8 lg:space-x-10 cursor-pointer">
+          {navigationItems.map((item, index) => (
+            <Link
+              key={index}
+              href={item.href}
+              className={`font-medium text-base transition-colors duration-300 ${
+                scrolled
+                  ? "text-gray-800 hover:text-yellow-500"
+                  : "text-white hover:text-yellow-400"
+              }`}
+              style={{ fontFamily: "Montserrat, Helvetica" }}
+            >
+              {item.label}
+            </Link>
+          ))}
 
           <Link
             href="/signup"
-            className="rounded-full px-4 py-2 text-sm font-semibold text-[#ffe500]"
+            className={`font-medium text-base primary-color transition-colors duration-300 cursor-pointer ${
+              scrolled ? "" : "drop-shadow-md"
+            }`}
             style={{ fontFamily: "Montserrat, Helvetica" }}
           >
             Register
@@ -83,32 +76,31 @@ const Navbar: React.FC<NavMenuProps> = ({ navigationItems }) => {
       </div>
 
       {menuOpen && (
-        <div className={`md:hidden mx-4 mb-4 rounded-2xl border border-white/20 p-3 backdrop-blur-xl ${scrolled ? "bg-white/70" : "bg-black/40"}`}>
-          <div className="flex flex-col gap-2">
-            {navigationItems.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="relative rounded-xl px-4 py-2 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="navbar-pill-mobile"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.45 }}
-                      className="absolute inset-0 rounded-xl border border-white/40 bg-white/20"
-                    />
-                  )}
-                  <span className={`relative z-10 ${scrolled ? "text-gray-800" : "text-white"}`}>{item.label}</span>
-                </Link>
-              );
-            })}
-            <Link href="/signup" className="px-4 py-2 font-medium text-yellow-400" onClick={() => setMenuOpen(false)}>
-              Register
+        <div
+          className={`md:hidden flex flex-col items-center space-y-4 pb-6 pt-4 transition-all duration-300 ${
+            scrolled ? "bg-white/95" : "bg-black/80"
+          }`}
+        >
+          {navigationItems.map((item, index) => (
+            <Link
+              key={index}
+              href={item.href}
+              className={`font-medium text-lg ${
+                scrolled ? "text-gray-800" : "text-white"
+              } hover:text-yellow-500 transition-colors duration-300`}
+              style={{ fontFamily: "Montserrat, Helvetica" }}
+              onClick={() => setMenuOpen(false)}
+            >
+              {item.label}
             </Link>
-          </div>
+          ))}
+          <Link
+            href="/signup"
+            className="font-medium text-lg text-yellow-500 hover:text-yellow-600 transition-colors duration-300"
+            onClick={() => setMenuOpen(false)}
+          >
+            Register
+          </Link>
         </div>
       )}
     </nav>
