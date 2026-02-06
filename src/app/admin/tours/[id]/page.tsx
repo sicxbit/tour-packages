@@ -1,6 +1,6 @@
 import TourForm from "@/components/admin/TourForm";
 import { prisma } from "@/lib/prisma";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 interface Params {
   params: Promise<{ id: string }>;
@@ -8,6 +8,11 @@ interface Params {
 
 export default async function EditTourPage({ params }: Params) {
   const { id } = await params;
+
+  if (id === "new") {
+    redirect("/admin/tours/new");
+  }
+
   const tour = await prisma.tour.findUnique({ where: { id } });
 
   if (!tour) {
