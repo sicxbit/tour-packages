@@ -6,17 +6,38 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as { email?: string; password?: string };
+    const email = body.email?.trim().toLowerCase();
+    const password = body.password?.trim();
 
-    if (!body.email || !body.password) {
+    if (!email || !password) {
       return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({ where: { email: body.email } });
+    const envAdminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+    const envAdminPassword = process.env.ADMIN_PASSWORD?.trim();
+
+    let user = await prisma.user.findUnique({ where: { email } });
+
+    if (envAdminEmail && envAdminPassword && email === envAdminEmail && password === envAdminPassword) {
+      const envPasswordHash = await bcrypt.hash(envAdminPassword, 10);
+
+      user = await prisma.user.upsert({
+        where: { email: envAdminEmail },
+        update: { passwordHash: envPasswordHash, role: "ADMIN" },
+        create: {
+          email: envAdminEmail,
+          name: "Admin",
+          passwordHash: envPasswordHash,
+          role: "ADMIN",
+        },
+      });
+    }
+
     if (!user) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
-    const isMatch = await bcrypt.compare(body.password, user.passwordHash);
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
     if (!isMatch) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
@@ -27,10 +48,7 @@ export async function POST(request: Request) {
       role: user.role,
     });
 
-    const response = NextResponse.json({
-      ok: true,
-      user: { id: user.id, email: user.email, name: user.name, role: user.role },
-    });
+    const response = NextResponse.json({ ok: true, role: user.role });
 
     response.cookies.set({
       name: SESSION_COOKIE,

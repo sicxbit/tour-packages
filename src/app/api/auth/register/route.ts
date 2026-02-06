@@ -9,22 +9,24 @@ export async function POST(request: Request) {
       email?: string;
       password?: string;
     };
+    const email = body.email?.trim().toLowerCase();
+    const password = body.password?.trim();
 
-    if (!body.email || !body.password) {
+    if (!email || !password) {
       return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
     }
 
-    const existing = await prisma.user.findUnique({ where: { email: body.email } });
+    const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
       return NextResponse.json({ error: "Email already registered" }, { status: 409 });
     }
 
-    const passwordHash = await bcrypt.hash(body.password, 10);
+    const passwordHash = await bcrypt.hash(password, 10);
 
     await prisma.user.create({
       data: {
         name: body.name,
-        email: body.email,
+        email,
         passwordHash,
       },
     });

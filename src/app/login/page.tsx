@@ -25,13 +25,17 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = (await response.json()) as { error?: string; user?: { role?: string } };
+      const data = (await response.json()) as { error?: string; ok?: boolean; role?: string };
 
       if (!response.ok) {
         throw new Error(data.error || "Login failed");
       }
 
-      router.push(data.user?.role === "ADMIN" ? "/admin" : "/");
+      if (data.role !== "ADMIN") {
+        throw new Error("Admin access required");
+      }
+
+      router.push("/admin");
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
