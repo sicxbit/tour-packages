@@ -17,7 +17,7 @@ export default function DiscoverSection() {
 
         {/* Overlay Gradient */}
         <div className="relative z-10 container mx-auto px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 py-20">
-            <div className="bg-black/20 rounded-3xl p-10 sm:p-12 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-10">
+            <div className="relative overflow-hidden bg-black/20 rounded-3xl p-10 sm:p-12 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-10">
           {/* Text Section */}
                 <div className="flex-1 text-left">
                     <h3 className="primary-color font-semibold text-2xl sm:text-3xl md:text-4xl">
@@ -42,21 +42,21 @@ export default function DiscoverSection() {
                 </div>
 
                 {/* Image Section */}
-                <div className="flex-1 flex flexjustify-center items-center relative gap">
-                    <div className="flex flex-col sm:flex-row items-center gap-6">
+                <div className="relative flex w-full flex-1 items-center justify-center">
+                    <div className="flex w-full max-w-[540px] flex-col items-center gap-6 sm:flex-row sm:items-end">
                         <Image
                         alt="Discover image 1"
                         src="/assets/imgs/banner/discover1.png"
                         width={397}
                         height={285}
-                        className="rounded-lg object-cover"
+                        className="w-full max-w-[260px] rounded-lg object-cover"
                         />
                         <Image
                         alt="Discover image 2"
                         src="/assets/imgs/banner/discover2.png"
                         width={355}
                         height={556}
-                        className="rounded-lg object-cover"
+                        className="w-full max-w-[240px] rounded-lg object-cover"
                         />
                     </div>
                 </div>

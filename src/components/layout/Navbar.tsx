@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { label: "Packages", href: "/packages" },
   { label: "About", href: "/about" },
   { label: "Login", href: "/login" },
+  { label: "Register", href: "/register" },
 ] as const;
 
 function isActiveRoute(pathname: string, href: string) {
@@ -18,9 +19,6 @@ function isActiveRoute(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-function isRegisterRoute(pathname: string) {
-  return pathname === "/register" || pathname.startsWith("/register/") || pathname === "/signup" || pathname.startsWith("/signup/");
-}
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -61,11 +59,6 @@ export default function Navbar() {
               </Link>
             );
           })}
-
-          <Link href="/signup" className="relative rounded-full px-4 py-2 text-sm font-semibold text-[#d8b400]">
-            {!!pathname && isRegisterRoute(pathname) && <motion.span layoutId="navbar-two-pill" transition={{ type: "spring", bounce: 0.25, duration: 0.45 }} className="absolute inset-0 rounded-full border border-gray-300/70 bg-white/80 shadow" />}
-            <span className="relative z-10">Register</span>
-          </Link>
         </div>
 
         <button className="md:hidden p-2" onClick={() => setMenuOpen((prev) => !prev)} aria-label="Toggle Menu" aria-expanded={menuOpen}>
@@ -85,10 +78,6 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            <Link href="/signup" className="relative rounded-xl px-4 py-2 font-semibold text-[#d8b400]" onClick={() => setMenuOpen(false)}>
-              {!!pathname && isRegisterRoute(pathname) && <motion.span layoutId="navbar-two-pill-mobile" className="absolute inset-0 rounded-xl bg-gray-100" />}
-              <span className="relative z-10">Register</span>
-            </Link>
           </div>
         </div>
       )}

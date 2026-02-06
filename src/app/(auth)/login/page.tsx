@@ -68,7 +68,7 @@ export default function LoginPage() {
           </form>
 
           <p className="text-center text-gray-700 mt-8">
-            Are you new? <a href="/signup" className="font-semibold text-gray-900 hover:text-yellow-400">Create an Account</a>
+            Are you new? <a href="/register" className="font-semibold text-gray-900 hover:text-yellow-400">Create an Account</a>
           </p>
         </div>
 
