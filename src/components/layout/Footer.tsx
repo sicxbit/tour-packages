@@ -66,14 +66,14 @@ export default function Footer() {
                     CONTACT US
                   </h3>
                   <a
-                    href="mailto:loremipsum@gmail.com"
+                    href="mailto:hello@bluelagoons.com"
                     className="block text-white text-base mb-4 hover:underline"
                   >
-                    loremipsum@gmail.com
+                    hello@bluelagoons.com
                   </a>
                   <p className="text-white text-base mb-4 leading-relaxed">
-                    24 Loremipsum, Lorem <br />
-                    Lorem inc
+                    24 Oceanfront Avenue, Blue Lagoons <br />
+                    Blue Lagoons Inc
                   </p>
                   <p className="text-white text-base">+34 875 328 58 47</p>
                 </div>

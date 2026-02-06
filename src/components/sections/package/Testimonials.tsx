@@ -2,22 +2,22 @@ import Image from "next/image";
 
 const testimonials = [
   {
-    name: "Lorem Ipsum",
+    name: "Blue Lagoons",
     location: "India",
     image: "/assets/imgs/banner/reviewer.png",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    text: "Blue Lagoons delivers thoughtfully planned island experiences.",
   },
   {
-    name: "Lorem Ipsum",
+    name: "Blue Lagoons",
     location: "India",
     image: "/assets/imgs/banner/reviewer.png",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    text: "Blue Lagoons delivers thoughtfully planned island experiences.",
   },
   {
-    name: "Lorem Ipsum",
+    name: "Blue Lagoons",
     location: "India",
     image: "/assets/imgs/banner/reviewer.png",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    text: "Blue Lagoons delivers thoughtfully planned island experiences.",
   },
 ];
 

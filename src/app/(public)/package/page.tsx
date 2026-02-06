@@ -37,10 +37,7 @@ export default function Package() {
             </div>
       
       <section className="[font-family:'Montserrat',Helvetica] text-lg container mx-auto px-4 sm:px-8 md:px-12 lg:px-20 xl:px-32 py-10 text-2xl font-light">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        From island-hopping escapes to laid-back beach retreats, Blue Lagoons packages are built for comfort, discovery, and memorable moments at every stop.
       </section>
       <PackageIncludes />
       <PackageExcludes />

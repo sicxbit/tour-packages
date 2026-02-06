@@ -114,8 +114,8 @@ export default function BookNowSection() {
                       height={200}
                     />
                     <div className="mt-4 text-2xl font-bold">
-                      <span className="text-white">Lorem </span>
-                      <span className="primary-color">Ipsum</span>
+                      <span className="text-white">Blue Lagoons </span>
+                      <span className="primary-color">Retreat</span>
                     </div>
                     <Image
                       className="mt-2 w-[110px] h-[18px] object-contain"

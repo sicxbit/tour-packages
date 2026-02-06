@@ -8,17 +8,17 @@ export default function AboutPage() {
     {
       title: "Competitive Prices",
       description:
-        "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "Blue Lagoons creates curated island itineraries with trusted local partners, transparent planning, and smooth booking from start to finish.",
     },
     {
       title: "Competitive Prices",
       description:
-        "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "Blue Lagoons creates curated island itineraries with trusted local partners, transparent planning, and smooth booking from start to finish.",
     },
     {
       title: "Competitive Prices",
       description:
-        "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "Blue Lagoons creates curated island itineraries with trusted local partners, transparent planning, and smooth booking from start to finish.",
     },
   ];
 
@@ -46,9 +46,7 @@ export default function AboutPage() {
                 Who <span className="text-yellow-400">We Are?</span>
               </h2>
               <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-                Lorem ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem ipsum has been the industry s
-                standard dummy text ever since the 1500s.
+                Our mission is to make tropical travel simple, safe, and memorable through curated packages designed for real travelers.
               </p>
             </div>
 
@@ -57,9 +55,7 @@ export default function AboutPage() {
                 Our <span className="text-yellow-400">Mission</span>
               </h3>
               <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-                Lorem ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem ipsum has been the industry s
-                standard dummy text ever since the 1500s.
+                Blue Lagoons is a coastal travel company focused on immersive island experiences, thoughtful itineraries, and reliable on-ground support.
               </p>
             </div>
           </div>

@@ -11,7 +11,7 @@ export default function BookTour() {
           <input
             type="text"
             className="mt-2 w-full bg-transparent [font-family:'Montserrat',Helvetica] text-lg p-3"
-            placeholder="Lorem Ipsum"
+            placeholder="Blue Lagoons"
           />
         </div>
 

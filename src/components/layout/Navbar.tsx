@@ -35,7 +35,7 @@ export default function Navbar() {
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/70 shadow-md backdrop-blur-md" : "bg-white/40 backdrop-blur-xs"}`}>
       <div className="mx-auto flex items-center justify-between px-4 sm:px-6 md:px-10 lg:px-16 py-4 md:py-3 max-w-[1400px]">
         <Link href="/" className="text-2xl font-semibold tracking-wide text-gray-900" style={{ fontFamily: "Montserrat, Helvetica" }}>
-          TRAVEL
+          BLUE LAGOONS
         </Link>
 
         <div className="hidden md:flex items-center gap-2 rounded-full border border-gray-300/70 bg-white/60 p-2 backdrop-blur-xl">

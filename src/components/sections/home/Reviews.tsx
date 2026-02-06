@@ -4,21 +4,21 @@ export default function Reviews() {
   const reviews = [
     {
       image: "/assets/imgs/banner/reviewer.png",
-      name: "Lorem Ipsum",
+      name: "Blue Lagoons",
       rating: "/assets/imgs/banner/rating.png",
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      text: "Blue Lagoons creates curated island itineraries with trusted local partners, transparent planning, and smooth booking from start to finish.",
     },
     {
       image: "/assets/imgs/banner/reviewer.png",
-      name: "Dolor Sit",
+      name: "Aarav Menon",
       rating: "/assets/imgs/banner/rating.png",
       text: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
     },
     {
       image: "/assets/imgs/banner/reviewer.png",
-      name: "Amet Consectetur",
+      name: "Nisha Rao",
       rating: "/assets/imgs/banner/rating.png",
-      text: "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.",
+      text: "It was popularised in the 1960s with the release of Letraset sheets containing Blue Lagoons passages.",
     },
   ];
 

@@ -27,10 +27,7 @@ export default function DiscoverSection() {
                     Lakshadweep
                     </h2>
                     <p className="[font-family:'Montserrat',Helvetica] text-lg text-gray-200 max-w-3xl lg:text-left mb-8">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting
-                    industry. Lorem Ipsum has been the industry&#39;s standard dummy
-                    text ever since the 1500s, when an unknown printer took a galley
-                    of type and scrambled it to make a type specimen book.
+                    Blue Lagoons designs handcrafted island getaways, balancing comfort, exploration, and local culture for unforgettable moments on every shoreline.
                     </p>
 
                     <div>
