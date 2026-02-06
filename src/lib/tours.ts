@@ -41,6 +41,7 @@ export function mapTourToPackage(tour: Tour): TourPackage {
     rating: 4.8,
     reviews: 120,
     groupSize: "2-10 people",
+    featured: tour.isFeatured,
     highlights: [
       `Discover ${tour.location}`,
       "Professional local guidance",

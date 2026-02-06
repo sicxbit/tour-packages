@@ -1,0 +1,3 @@
+ALTER TABLE "Tour"
+ADD COLUMN "isFeatured" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN "featuredOrder" INTEGER;

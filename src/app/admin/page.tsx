@@ -2,17 +2,15 @@ import Link from "next/link";
 
 export default function AdminPage() {
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-10">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl border shadow-sm p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">Admin Dashboard</h1>
-        <p className="text-gray-600 mb-8">Manage tours and platform data.</p>
+    <div>
+      <h1 className="mb-2 text-3xl font-bold">Admin Dashboard</h1>
+      <p className="mb-8 text-white/80">Manage tours and homepage featured content.</p>
 
-        <div className="grid sm:grid-cols-2 gap-4">
-          <Link href="/admin/tours" className="p-6 border rounded-xl hover:bg-gray-50">
-            <h2 className="font-semibold text-xl mb-1">Tours</h2>
-            <p className="text-gray-600">Create, edit and delete tour packages.</p>
-          </Link>
-        </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Link href="/admin/tours" className="rounded-2xl border border-white/30 bg-white/10 p-6 backdrop-blur-md transition hover:bg-white/20">
+          <h2 className="mb-2 text-xl font-semibold">Tours</h2>
+          <p className="text-sm text-white/80">Create, edit, delete, and feature tours for homepage display.</p>
+        </Link>
       </div>
     </div>
   );

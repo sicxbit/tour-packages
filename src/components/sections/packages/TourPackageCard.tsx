@@ -1,6 +1,6 @@
 "use client";
 import { TourPackage } from "@/lib/tours";
-import { MapPin, Clock, Users, Star } from "lucide-react";
+import { MapPin, Clock, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,11 +21,11 @@ export function TourPackageCard({ tour }: TourPackageCardProps) {
           width={800}
           height={600}
         />
-        {/* {tour.featured && (
-          <div className="badge absolute top-4 left-4 bg-yellow-500 hover:bg-yellow-600 rounded-full px-3 py-1">
+        {tour.featured && (
+          <div className="badge absolute top-4 left-4 rounded-full bg-yellow-500 px-3 py-1 text-xs font-semibold text-black">
             Featured
           </div>
-        )} */}
+        )}
         {/* <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1">
           <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
           <span className="text-sm">{tour.rating}</span>
