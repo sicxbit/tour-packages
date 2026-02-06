@@ -6,17 +6,19 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as { email?: string; password?: string };
+    const email = body.email?.trim().toLowerCase();
+    const password = body.password?.trim();
 
-    if (!body.email || !body.password) {
+    if (!email || !password) {
       return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({ where: { email: body.email } });
+    const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
-    const isMatch = await bcrypt.compare(body.password, user.passwordHash);
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
     if (!isMatch) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
