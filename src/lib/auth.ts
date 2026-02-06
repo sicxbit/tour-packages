@@ -1,9 +1,10 @@
-import { Role } from "@prisma/client";
 import { SignJWT, jwtVerify } from "jose";
+
+export type SessionRole = "ADMIN" | "USER";
 
 export interface SessionPayload {
   sub: string;
-  role: Role;
+  role: SessionRole;
   email: string;
 }
 
@@ -27,13 +28,13 @@ export async function signSessionToken(payload: SessionPayload) {
     .sign(getJwtSecret());
 }
 
-export async function verifySessionToken(token: string) {
+export async function verifySessionToken(token: string): Promise<SessionPayload> {
   const { payload } = await jwtVerify(token, getJwtSecret());
 
   return {
-    sub: payload.sub,
-    role: payload.role as Role,
-    email: payload.email as string,
+    sub: String(payload.sub),
+    role: payload.role === "ADMIN" ? "ADMIN" : "USER",
+    email: String(payload.email),
   };
 }
 
