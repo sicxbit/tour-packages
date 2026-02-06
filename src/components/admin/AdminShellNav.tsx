@@ -2,7 +2,8 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 const adminLinks = [
   { href: "/admin", label: "Dashboard" },
@@ -12,10 +13,23 @@ const adminLinks = [
 
 export default function AdminShellNav() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      setLoggingOut(true);
+      await fetch("/api/auth/logout", { method: "POST" });
+    } finally {
+      router.replace("/login");
+      router.refresh();
+      setLoggingOut(false);
+    }
+  };
 
   return (
     <div className="sticky top-4 z-40 rounded-2xl border border-white/30 bg-white/15 p-2 backdrop-blur-xl shadow-lg">
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         {adminLinks.map((link) => {
           const isActive = pathname === link.href;
           return (
@@ -25,6 +39,14 @@ export default function AdminShellNav() {
             </Link>
           );
         })}
+        <button
+          type="button"
+          onClick={handleLogout}
+          disabled={loggingOut}
+          className="ml-auto rounded-xl border border-white/35 bg-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/30 disabled:cursor-not-allowed disabled:opacity-70"
+        >
+          {loggingOut ? "Logging out..." : "Logout"}
+        </button>
       </div>
     </div>
   );

@@ -27,10 +27,7 @@ export async function POST(request: Request) {
       role: user.role,
     });
 
-    const response = NextResponse.json({
-      ok: true,
-      user: { id: user.id, email: user.email, name: user.name, role: user.role },
-    });
+    const response = NextResponse.json({ ok: true, role: user.role });
 
     response.cookies.set({
       name: SESSION_COOKIE,
