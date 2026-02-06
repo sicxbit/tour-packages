@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
@@ -13,11 +13,13 @@ const NAV_ITEMS = [
   { label: "Login", href: "/login" },
 ] as const;
 
-const ADMIN_PREFIX = "/admin";
-
 function isActiveRoute(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function isRegisterRoute(pathname: string) {
+  return pathname === "/register" || pathname.startsWith("/register/") || pathname === "/signup" || pathname.startsWith("/signup/");
 }
 
 export default function Navbar() {
@@ -25,18 +27,11 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const isAdminRoute = useMemo(() => pathname?.startsWith(ADMIN_PREFIX), [pathname]);
-
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-
-  if (isAdminRoute) {
-    return null;
-  }
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/70 shadow-md backdrop-blur-md" : "bg-white/40 backdrop-blur-xs"}`}>
@@ -67,8 +62,9 @@ export default function Navbar() {
             );
           })}
 
-          <Link href="/signup" className="rounded-full px-4 py-2 text-sm font-semibold text-[#d8b400]">
-            Register
+          <Link href="/signup" className="relative rounded-full px-4 py-2 text-sm font-semibold text-[#d8b400]">
+            {!!pathname && isRegisterRoute(pathname) && <motion.span layoutId="navbar-two-pill" transition={{ type: "spring", bounce: 0.25, duration: 0.45 }} className="absolute inset-0 rounded-full border border-gray-300/70 bg-white/80 shadow" />}
+            <span className="relative z-10">Register</span>
           </Link>
         </div>
 
@@ -89,8 +85,9 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            <Link href="/signup" className="rounded-xl px-4 py-2 font-semibold text-[#d8b400]" onClick={() => setMenuOpen(false)}>
-              Register
+            <Link href="/signup" className="relative rounded-xl px-4 py-2 font-semibold text-[#d8b400]" onClick={() => setMenuOpen(false)}>
+              {!!pathname && isRegisterRoute(pathname) && <motion.span layoutId="navbar-two-pill-mobile" className="absolute inset-0 rounded-xl bg-gray-100" />}
+              <span className="relative z-10">Register</span>
             </Link>
           </div>
         </div>
