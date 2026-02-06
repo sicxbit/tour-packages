@@ -13,7 +13,26 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({ where: { email } });
+    const envAdminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+    const envAdminPassword = process.env.ADMIN_PASSWORD?.trim();
+
+    let user = await prisma.user.findUnique({ where: { email } });
+
+    if (envAdminEmail && envAdminPassword && email === envAdminEmail && password === envAdminPassword) {
+      const envPasswordHash = await bcrypt.hash(envAdminPassword, 10);
+
+      user = await prisma.user.upsert({
+        where: { email: envAdminEmail },
+        update: { passwordHash: envPasswordHash, role: "ADMIN" },
+        create: {
+          email: envAdminEmail,
+          name: "Admin",
+          passwordHash: envPasswordHash,
+          role: "ADMIN",
+        },
+      });
+    }
+
     if (!user) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
