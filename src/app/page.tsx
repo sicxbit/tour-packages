@@ -1,6 +1,5 @@
 import BlurText from "@/components/common/BlurText";
 import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
 import AboutSection from "@/components/sections/home/AboutSection";
 import BookNowSection from "@/components/sections/home/BookNow";
 import DiscoverSection from "@/components/sections/home/DiscoverSection";
@@ -9,13 +8,6 @@ import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 
 export default async function Home() {
-  const navigationItems = [
-    { label: "Home", href: "/" },
-    { label: "Packages", href: "/packages" },
-    { label: "About", href: "/about" },
-    { label: "Login", href: "/login" },
-  ];
-
   const featuredTours = await prisma.tour.findMany({
     where: { isFeatured: true },
     orderBy: [{ featuredOrder: "asc" }, { createdAt: "desc" }],
@@ -27,9 +19,6 @@ export default async function Home() {
       <Image className="absolute inset-0 h-full w-full object-cover" alt="Background" src="/assets/imgs/banner/background_image 2.png" width={1440} height={1080} priority />
       <div className="relative min-h-screen w-full overflow-hidden bg-transparent">
         <div className="absolute inset-0 bg-black/20" />
-
-        <Navbar navigationItems={navigationItems} />
-
         <section className="absolute inset-0 z-10 container mx-auto flex flex-col justify-center px-6 pb-0 sm:justify-end sm:px-10 sm:pb-16 md:px-16 md:pb-24 lg:px-24 lg:pb-32 xl:px-32">
           <h2 className="text-2xl font-semibold text-white sm:text-3xl md:text-4xl">WEBSITE</h2>
 

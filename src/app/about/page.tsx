@@ -1,7 +1,6 @@
 "use client";
 
 import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
 import Image from "next/image";
 
 export default function AboutPage() {
@@ -23,16 +22,8 @@ export default function AboutPage() {
     },
   ];
 
-  const navigationItems = [
-    { label: "Home", href: "/", active: true },
-    { label: "Packages", href: "/packages", active: false },
-    { label: "About", href: "about", active: false },
-    { label: "Login", href: "login", active: false },
-  ];
-
   return (
     <div className="min-h-screen bg-white">
-        <Navbar navigationItems={navigationItems} />
       {/* Hero Image */}
       <div className="w-full h-64 md:h-80 overflow-hidden">
         <Image
