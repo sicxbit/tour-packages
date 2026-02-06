@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { motion } from "motion/react";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 type NavItem = {
   label: string;
@@ -13,118 +15,73 @@ interface NavMenuProps {
   navigationItems: NavItem[];
 }
 
-const Navbar: React.FC<NavMenuProps> = ({ navigationItems }) => {
+const NavbarTwo: React.FC<NavMenuProps> = ({ navigationItems }) => {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Detect scroll position
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-transparent shadow-md backdrop-blur-md"
-          : "bg-transparent backdrop-blur-xs"
-      }`}
-    >
-      <div
-        className={`
-          mx-auto flex items-center justify-between 
-          px-4 sm:px-6 md:px-10 lg:px-16 
-          py-4 md:py-3 
-          max-w-[1400px]
-        `}
-      >
-        {/* Logo / Brand */}
-        <Link
-          href="/"
-          className="text-2xl font-semibold tracking-wide cursor-pointer text-gray-900"
-          style={{ fontFamily: "Montserrat, Helvetica" }}
-        >
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/70 shadow-md backdrop-blur-md" : "bg-white/40 backdrop-blur-xs"}`}>
+      <div className="mx-auto flex items-center justify-between px-4 sm:px-6 md:px-10 lg:px-16 py-4 md:py-3 max-w-[1400px]">
+        <Link href="/" className="text-2xl font-semibold tracking-wide text-gray-900" style={{ fontFamily: "Montserrat, Helvetica" }}>
           TRAVEL
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8 lg:space-x-10 cursor-pointer">
-          {navigationItems.map((item, index) => (
-            <Link
-              key={index}
-              href={item.href}
-              className="font-medium text-base transition-colors duration-300  text-gray-800 hover:text-yellow-500"
-              style={{ fontFamily: "Montserrat, Helvetica" }}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="hidden md:flex items-center gap-2 rounded-full border border-gray-300/70 bg-white/60 p-2 backdrop-blur-xl">
+          {navigationItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="relative rounded-full px-4 py-2 text-sm font-medium text-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400"
+                style={{ fontFamily: "Montserrat, Helvetica" }}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="navbar-two-pill"
+                    transition={{ type: "spring", bounce: 0.25, duration: 0.45 }}
+                    className="absolute inset-0 rounded-full border border-gray-300/70 bg-white/80 shadow"
+                  />
+                )}
+                <span className="relative z-10">{item.label}</span>
+              </Link>
+            );
+          })}
 
-          {/* Register Button */}
-          <Link
-            href="/signup"
-            className={`font-medium text-base primary-color transition-colors duration-300 cursor-pointer ${
-              scrolled ? "" : "drop-shadow-md"
-            }`}
-            style={{ fontFamily: "Montserrat, Helvetica" }}
-          >
+          <Link href="/signup" className="rounded-full px-4 py-2 text-sm font-semibold text-[#d8b400]">
             Register
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden p-2 text-2xl transition-colors"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle Menu"
-        >
-          {menuOpen ? (
-            <X
-              className="w-6 h-6 text-gray-800"
-            />
-          ) : (
-            <Menu
-              className="w-6 h-6 text-gray-800"
-            />
-          )}
+        <button className="md:hidden p-2" onClick={() => setMenuOpen((prev) => !prev)} aria-label="Toggle Menu" aria-expanded={menuOpen}>
+          {menuOpen ? <X className="w-6 h-6 text-gray-800" /> : <Menu className="w-6 h-6 text-gray-800" />}
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
       {menuOpen && (
-        <div
-          className={`md:hidden flex flex-col items-center space-y-4 pb-6 pt-4 transition-all duration-300 ${
-            scrolled ? "bg-white/95" : "bg-black/80"
-          }`}
-        >
-          {navigationItems.map((item, index) => (
-            <Link
-              key={index}
-              href={item.href}
-              className={`font-medium text-lg ${
-                scrolled ? "text-gray-800" : "text-white"
-              } hover:text-yellow-500 transition-colors duration-300`}
-              style={{ fontFamily: "Montserrat, Helvetica" }}
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            href="/signup"
-            className="font-medium text-lg text-yellow-500 hover:text-yellow-600 transition-colors duration-300"
-            onClick={() => setMenuOpen(false)}
-          >
-            Register
-          </Link>
+        <div className="md:hidden mx-4 mb-4 rounded-2xl border border-gray-200 bg-white/90 p-3 backdrop-blur-xl">
+          <div className="flex flex-col gap-2">
+            {navigationItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link key={item.href} href={item.href} className="relative rounded-xl px-4 py-2 font-medium text-gray-800" onClick={() => setMenuOpen(false)}>
+                  {isActive && <motion.span layoutId="navbar-two-pill-mobile" className="absolute inset-0 rounded-xl bg-gray-100" />}
+                  <span className="relative z-10">{item.label}</span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       )}
     </nav>
   );
 };
 
-export default Navbar;
+export default NavbarTwo;

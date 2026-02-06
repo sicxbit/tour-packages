@@ -10,6 +10,8 @@ interface TourFormValues {
   price: number;
   description: string;
   imageUrl?: string;
+  isFeatured: boolean;
+  featuredOrder?: number;
 }
 
 interface TourFormProps {
@@ -28,6 +30,8 @@ export default function TourForm({ mode, initialValues, tourId }: TourFormProps)
       price: 0,
       description: "",
       imageUrl: "",
+      isFeatured: false,
+      featuredOrder: undefined,
     },
   );
   const [error, setError] = useState("");
@@ -78,23 +82,44 @@ export default function TourForm({ mode, initialValues, tourId }: TourFormProps)
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-2xl shadow-sm border">
-      <input className="w-full border rounded-lg p-3" placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required />
-      <input className="w-full border rounded-lg p-3" placeholder="Location" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} required />
-      <input className="w-full border rounded-lg p-3" placeholder="Duration (e.g. 5 Days)" value={form.duration} onChange={(e) => setForm({ ...form, duration: e.target.value })} required />
-      <input className="w-full border rounded-lg p-3" type="number" min="0" step="0.01" placeholder="Price" value={form.price} onChange={(e) => setForm({ ...form, price: Number(e.target.value) })} required />
-      <input className="w-full border rounded-lg p-3" placeholder="Image URL (optional)" value={form.imageUrl || ""} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })} />
-      <textarea className="w-full border rounded-lg p-3 min-h-32" placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} required />
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-white/30 bg-white/10 p-6 shadow-sm backdrop-blur-md">
+      <input className="w-full rounded-lg border border-white/40 bg-white/20 p-3 placeholder:text-white/70" placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required />
+      <input className="w-full rounded-lg border border-white/40 bg-white/20 p-3 placeholder:text-white/70" placeholder="Location" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} required />
+      <input className="w-full rounded-lg border border-white/40 bg-white/20 p-3 placeholder:text-white/70" placeholder="Duration (e.g. 5 Days)" value={form.duration} onChange={(e) => setForm({ ...form, duration: e.target.value })} required />
+      <input className="w-full rounded-lg border border-white/40 bg-white/20 p-3 placeholder:text-white/70" type="number" min="0" step="0.01" placeholder="Price" value={form.price} onChange={(e) => setForm({ ...form, price: Number(e.target.value) })} required />
+      <input className="w-full rounded-lg border border-white/40 bg-white/20 p-3 placeholder:text-white/70" placeholder="Image URL (optional)" value={form.imageUrl || ""} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })} />
+      <textarea className="min-h-32 w-full rounded-lg border border-white/40 bg-white/20 p-3 placeholder:text-white/70" placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} required />
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      <label className="flex items-center gap-3 rounded-lg border border-white/30 bg-white/10 p-3">
+        <input type="checkbox" checked={form.isFeatured} onChange={(e) => setForm({ ...form, isFeatured: e.target.checked })} />
+        <span>Show in homepage featured section</span>
+      </label>
+
+      <input
+        className="w-full rounded-lg border border-white/40 bg-white/20 p-3 placeholder:text-white/70 disabled:opacity-50"
+        type="number"
+        min="1"
+        step="1"
+        placeholder="Featured order (optional)"
+        value={form.featuredOrder ?? ""}
+        disabled={!form.isFeatured}
+        onChange={(e) =>
+          setForm({
+            ...form,
+            featuredOrder: e.target.value === "" ? undefined : Number(e.target.value),
+          })
+        }
+      />
+
+      {error && <p className="text-sm text-red-200">{error}</p>}
 
       <div className="flex gap-3">
-        <button type="submit" disabled={loading} className="bg-yellow-400 hover:bg-yellow-500 px-5 py-2 rounded-full font-semibold disabled:bg-gray-300">
+        <button type="submit" disabled={loading} className="rounded-full border border-white/40 bg-white/25 px-5 py-2 font-semibold transition hover:bg-white/35 disabled:opacity-60">
           {loading ? "Saving..." : mode === "create" ? "Create Tour" : "Update Tour"}
         </button>
 
         {mode === "edit" && (
-          <button type="button" onClick={handleDelete} disabled={loading} className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-full disabled:bg-red-300">
+          <button type="button" onClick={handleDelete} disabled={loading} className="rounded-full bg-red-500 px-5 py-2 text-white disabled:opacity-70">
             Delete Tour
           </button>
         )}

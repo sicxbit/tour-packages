@@ -4,64 +4,36 @@ import Navbar from "@/components/layout/Navbar";
 import AboutSection from "@/components/sections/home/AboutSection";
 import BookNowSection from "@/components/sections/home/BookNow";
 import DiscoverSection from "@/components/sections/home/DiscoverSection";
-import Reviews from "@/components/sections/home/Reviews";
+import FeaturedTours from "@/components/sections/home/FeaturedTours";
+import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
   const navigationItems = [
-    { label: "Home", href: "/", active: true },
-    { label: "Packages", href: "/packages", active: false },
-    { label: "About", href: "about", active: false },
-    { label: "Login", href: "login", active: false },
+    { label: "Home", href: "/" },
+    { label: "Packages", href: "/packages" },
+    { label: "About", href: "/about" },
+    { label: "Login", href: "/login" },
   ];
+
+  const featuredTours = await prisma.tour.findMany({
+    where: { isFeatured: true },
+    orderBy: [{ featuredOrder: "asc" }, { createdAt: "desc" }],
+    take: 6,
+  });
 
   return (
     <div className="relative">
-      {/* Background */}
-      <Image
-        className="absolute inset-0 w-full h-full object-cover"
-        alt="Background"
-        src="/assets/imgs/banner/background_image 2.png"
-        width={1440}
-        height={1080}
-        priority
-      />
-      <div className="relative w-full min-h-screen overflow-hidden bg-transparent">
-        {/* Background Image */}
-        {/* <Image
-          className="absolute inset-0 w-full h-full object-cover"
-          alt="Background image"
-          src="/assets/imgs/banner/1.jpg"
-          width={1440}
-          height={4823}
-          loading="lazy"
-        /> */}
-
-        {/* Overlay Gradient */}
+      <Image className="absolute inset-0 h-full w-full object-cover" alt="Background" src="/assets/imgs/banner/background_image 2.png" width={1440} height={1080} priority />
+      <div className="relative min-h-screen w-full overflow-hidden bg-transparent">
         <div className="absolute inset-0 bg-black/20" />
 
-        {/* Navbar */}
         <Navbar navigationItems={navigationItems} />
 
-        {/* Hero Section (aligned at bottom) */}
-<section
-  className="
-    absolute inset-0 z-10
-    flex flex-col
-    justify-center sm:justify-end
-    container mx-auto
-    px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32
-    pb-0 sm:pb-16 md:pb-24 lg:pb-32
-  "
->
+        <section className="absolute inset-0 z-10 container mx-auto flex flex-col justify-center px-6 pb-0 sm:justify-end sm:px-10 sm:pb-16 md:px-16 md:pb-24 lg:px-24 lg:pb-32 xl:px-32">
+          <h2 className="text-2xl font-semibold text-white sm:text-3xl md:text-4xl">WEBSITE</h2>
 
-          <h2 className="font-semibold text-white text-2xl sm:text-3xl md:text-4xl">
-            WEBSITE
-          </h2>
-
-          <h1 className="font-extrabold primary-color text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
-            TITLE
-          </h1>
+          <h1 className="primary-color text-4xl font-extrabold leading-tight sm:text-5xl md:text-6xl lg:text-7xl">TITLE</h1>
 
           <BlurText
             text="Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -72,12 +44,8 @@ export default function Home() {
             animateBy="characters"
             direction="top"
             triggerOnce={false}
-            className="[font-family:'Montserrat',Helvetica] text-lg text-gray-200 max-w-3xl"
-            animationFrom={{
-              filter: "blur(10px)",
-              opacity: 0,
-              y: -30,
-            }}
+            className="[font-family:'Montserrat',Helvetica] max-w-3xl text-lg text-gray-200"
+            animationFrom={{ filter: "blur(10px)", opacity: 0, y: -30 }}
             animationTo={[
               {
                 filter: "blur(3px)",
@@ -93,11 +61,11 @@ export default function Home() {
           />
         </section>
       </div>
-      <DiscoverSection/>
-      <BookNowSection/>
-      {/* <Reviews/> */}
-      <AboutSection/>
-      <Footer/>
+      <DiscoverSection />
+      <FeaturedTours tours={featuredTours} />
+      <BookNowSection />
+      <AboutSection />
+      <Footer />
     </div>
   );
 }

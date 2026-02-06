@@ -5,6 +5,8 @@ export interface TourPayload {
   price: number;
   description: string;
   imageUrl?: string;
+  isFeatured: boolean;
+  featuredOrder?: number;
 }
 
 export function validateTourPayload(body: unknown): {
@@ -31,6 +33,17 @@ export function validateTourPayload(body: unknown): {
     return { valid: false, message: "price must be a non-negative number" };
   }
 
+  const isFeatured = Boolean(payload.isFeatured);
+  const featuredOrderRaw = payload.featuredOrder;
+  const featuredOrder =
+    featuredOrderRaw === undefined || featuredOrderRaw === null || featuredOrderRaw === ""
+      ? undefined
+      : Number(featuredOrderRaw);
+
+  if (featuredOrder !== undefined && (!Number.isInteger(featuredOrder) || featuredOrder < 1)) {
+    return { valid: false, message: "featuredOrder must be a positive integer" };
+  }
+
   return {
     valid: true,
     data: {
@@ -40,6 +53,8 @@ export function validateTourPayload(body: unknown): {
       description: String(payload.description),
       price,
       imageUrl: payload.imageUrl ? String(payload.imageUrl) : undefined,
+      isFeatured,
+      featuredOrder: isFeatured ? featuredOrder : undefined,
     },
   };
 }

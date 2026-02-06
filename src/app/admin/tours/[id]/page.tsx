@@ -20,22 +20,22 @@ export default async function EditTourPage({ params }: Params) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-10">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Edit Tour</h1>
-        <TourForm
-          mode="edit"
-          tourId={tour.id}
-          initialValues={{
-            title: tour.title,
-            location: tour.location,
-            duration: tour.duration,
-            price: tour.price,
-            description: tour.description,
-            imageUrl: tour.imageUrl || "",
-          }}
-        />
-      </div>
+    <div>
+      <h1 className="mb-6 text-3xl font-bold">Edit Tour</h1>
+      <TourForm
+        mode="edit"
+        tourId={tour.id}
+        initialValues={{
+          title: tour.title,
+          location: tour.location,
+          duration: tour.duration,
+          price: tour.price,
+          description: tour.description,
+          imageUrl: tour.imageUrl || "",
+          isFeatured: tour.isFeatured,
+          featuredOrder: tour.featuredOrder ?? undefined,
+        }}
+      />
     </div>
   );
 }
