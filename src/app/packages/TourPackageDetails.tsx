@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "@/components/layout/NavbarTwo";
 import { TourPackage } from "@/lib/tours";
 import { 
   MapPin, 
@@ -20,13 +19,6 @@ interface TourPackageDetailProps {
   tour: TourPackage;
 }
 
-const navigationItems = [
-  { label: "Home", href: "/", active: false },
-  { label: "Tours", href: "/packages", active: true },
-  { label: "About", href: "/about", active: false },
-  { label: "Login", href: "/login", active: false },
-];
-
 export default function TourPackageDetail({ tour }: TourPackageDetailProps) {
   const [activeTab, setActiveTab] = useState<"itinerary" | "info">("itinerary");
 
@@ -34,7 +26,6 @@ export default function TourPackageDetail({ tour }: TourPackageDetailProps) {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="relative h-[500px] overflow-hidden">
-        <Navbar navigationItems={navigationItems} />
         <Image
           src={tour.image}
           alt={tour.title}

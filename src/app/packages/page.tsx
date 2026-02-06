@@ -1,5 +1,4 @@
 import { TourPackageCard } from "@/components/sections/packages/TourPackageCard";
-import Navbar from "@/components/layout/NavbarTwo";
 import Image from "next/image";
 import Footer from "@/components/layout/Footer";
 import { prisma } from "@/lib/prisma";
@@ -9,16 +8,8 @@ export default async function Packages() {
   const tours = await prisma.tour.findMany({ orderBy: { createdAt: "desc" } });
   const mappedTours = tours.map(mapTourToPackage);
 
-  const navigationItems = [
-    { label: "Home", href: "/", active: false },
-    { label: "Packages", href: "/packages", active: true },
-    { label: "About", href: "/about", active: false },
-    { label: "Login", href: "/login", active: false },
-  ];
-
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar navigationItems={navigationItems} />
       <div className="relative h-[400px] overflow-hidden bg-white">
         <Image className="absolute inset-0 w-full h-full object-cover" alt="Travel background" src="/assets/imgs/banner/beach.jpg" fill priority />
         <div className="absolute inset-0 bg-black/20" />

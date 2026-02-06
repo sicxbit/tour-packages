@@ -3,21 +3,13 @@ import PackageExcludes from "@/components/sections/package/PackageExcludes";
 import TravelPlans from "@/components/sections/package/TravelPlans";
 import PackageGallery from "@/components/sections/package/PackageGallery";
 import BookTour from "@/components/sections/package/BookTour";
-import Navbar from "@/components/layout/NavbarTwo";
 import Image from "next/image";
 import Footer from "@/components/layout/Footer";
 
 export default function Package() {
-  const navigationItems = [
-    { label: "Home", href: "/", active: true },
-    { label: "Packages", href: "/packages", active: false },
-    { label: "About", href: "about", active: false },
-    { label: "Login", href: "login", active: false },
-  ];
   
   return (
     <div className="bg-white text-black max-w-screen overflow-hidden">
-        <Navbar navigationItems={navigationItems} />
       <div className="relative w-full h-[60vh] overflow-hidden bg-white">
       
               {/* Background Image */}
