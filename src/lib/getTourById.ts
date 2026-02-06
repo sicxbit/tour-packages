@@ -1,6 +1,5 @@
-import { tours } from "./tours";
+import { prisma } from "./prisma";
 
-
-export function getTourById(id: string) {
-  return tours.find((tour) => tour.id === id);
+export async function getTourById(id: string) {
+  return prisma.tour.findUnique({ where: { id } });
 }
