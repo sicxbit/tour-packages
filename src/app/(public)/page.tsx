@@ -21,7 +21,7 @@ export default async function Home() {
 
   return (
     <div className="relative">
-      <Image className="absolute inset-0 h-full w-full object-cover" alt="Background" src="/assets/imgs/banner/background_image 2.png" width={1440} height={1080} priority />
+      <Image className="absolute inset-0 h-full w-full object-cover" alt="Background" src="/assets/imgs/banner/background_image 2.png" fill sizes="100vw" priority />
       <div className="relative min-h-screen w-full overflow-hidden bg-transparent">
         <div className="absolute inset-0 bg-black/20" />
         <section className="absolute inset-0 z-10 container mx-auto flex flex-col justify-center px-6 pb-0 sm:justify-end sm:px-10 sm:pb-16 md:px-16 md:pb-24 lg:px-24 lg:pb-32 xl:px-32">

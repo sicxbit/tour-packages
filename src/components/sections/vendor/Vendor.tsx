@@ -11,7 +11,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { useRef } from "react";
 import Link from "next/link";
-import Review from "./Review";
 import Gallery from "./Gallery";
 
 export default function VendorDetails() {
@@ -45,46 +44,14 @@ export default function VendorDetails() {
     },
   ];
 
-  const reviews = [
-    {
-      image: "/assets/imgs/banner/reviewer.png",
-      name: "Blue Lagoons",
-      rating: "/assets/imgs/banner/rating.png",
-      text: "Blue Lagoons creates curated island itineraries with trusted local partners, transparent planning, and smooth booking from start to finish.",
-    },
-    {
-      image: "/assets/imgs/banner/reviewer.png",
-      name: "Aarav Menon",
-      rating: "/assets/imgs/banner/rating.png",
-      text: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    },
-    {
-      image: "/assets/imgs/banner/reviewer.png",
-      name: "Nisha Rao",
-      rating: "/assets/imgs/banner/rating.png",
-      text: "It was popularised in the 1960s with the release of Letraset sheets containing Blue Lagoons passages.",
-    },
-  ];
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden flex items-center justify-center bg-white">
-      {/* Background */}
-      {/* <Image
-        className="absolute inset-0 w-full h-full object-cover"
-        alt="Background"
-        src="/assets/imgs/banner/beach.jpg"
-        width={1440}
-        height={1080}
-        priority
-      /> */}
-
-      {/* Overlay + Content */}
       <div className="relative z-10 container mx-auto px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 py-20">
         <div className="bg-black/30 rounded-3xl p-8 sm:p-10 md:p-14 text-white">
-        {/* booking */}
           <div>
             {/* Heading */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-10 text-left mb-10">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-10 text-left">
               <span className="text-white">Book Your </span>
               <span className="primary-color">Trip</span>
             </h2>
@@ -164,10 +131,7 @@ export default function VendorDetails() {
             </div>
           </div>
 
-            {/* Reviews Section */}
-          {/* <Review/> */}
-
-          <Gallery/>
+          <Gallery />
         </div>
       </div>
     </section>
