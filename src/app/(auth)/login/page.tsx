@@ -1,9 +1,32 @@
 "use client";
 
-import { useState, FormEvent } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+async function signIn(email: string, password: string) {
+  const response = await fetch("/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+
+  const data = (await response.json()) as { error?: string; ok?: boolean; role?: string };
+
+  if (!response.ok) {
+    return { success: false, error: data.error || "Login failed" };
+  }
+
+  if (data.role !== "ADMIN") {
+    return { success: false, error: "Admin access required" };
+  }
+
+  return { success: true };
+}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,34 +34,37 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMessage("");
+
+    const normalizedEmail = email.trim();
+    if (!normalizedEmail || !password.trim()) {
+      setErrorMessage("Please enter both email and password.");
+      return;
+    }
+
+    if (!emailPattern.test(normalizedEmail)) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+
     setLoading(true);
-    setError("");
 
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const result = await signIn(normalizedEmail, password);
 
-      const data = (await response.json()) as { error?: string; ok?: boolean; role?: string };
-
-      if (!response.ok) {
-        throw new Error(data.error || "Login failed");
-      }
-
-      if (data.role !== "ADMIN") {
-        throw new Error("Admin access required");
+      if (!result.success) {
+        setErrorMessage(result.error);
+        return;
       }
 
       router.push("/admin");
       router.refresh();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Login failed");
+    } catch {
+      setErrorMessage("Login failed");
     } finally {
       setLoading(false);
     }
@@ -60,7 +86,7 @@ export default function LoginPage() {
               </button>
             </div>
 
-            {error && <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">{error}</div>}
+            {errorMessage && <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">{errorMessage}</div>}
 
             <button type="submit" disabled={loading} className="w-full bg-yellow-400 hover:bg-yellow-500 disabled:bg-gray-300 text-black font-bold py-3 rounded-full">
               {loading ? "Logging in..." : "Login"}
@@ -68,7 +94,10 @@ export default function LoginPage() {
           </form>
 
           <p className="text-center text-gray-700 mt-8">
-            Are you new? <a href="/register" className="font-semibold text-gray-900 hover:text-yellow-400">Create an Account</a>
+            Are you new?{" "}
+            <Link href="/signup" className="font-semibold text-gray-900 hover:text-yellow-400">
+              Create an Account
+            </Link>
           </p>
         </div>
 

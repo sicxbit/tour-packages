@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { MailIcon } from "lucide-react";
 import { SiFacebook } from "react-icons/si";
 import { BsTwitterX } from "react-icons/bs";
@@ -9,16 +8,6 @@ import { FaInstagram } from "react-icons/fa6";
 export default function Footer() {
   return (
     <section className="relative w-full bg-transparent overflow-hidden flex items-center justify-center">
-      {/* Background Image */}
-      {/* <Image
-        className="absolute inset-0 w-full h-full object-cover"
-        alt="Background"
-        src="/assets/imgs/banner/7.jpg"
-        width={1440}
-        height={1080}
-        priority
-      /> */}
-
       {/* Footer Content */}
       <footer className="relative z-10 w-full">
         <div className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 py-16">

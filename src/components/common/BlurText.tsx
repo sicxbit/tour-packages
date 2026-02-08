@@ -1,5 +1,5 @@
 "use client";
-import { motion, TargetAndTransition } from 'motion/react';
+import { motion } from 'motion/react';
 import { useEffect, useRef, useState, useMemo } from 'react';
 
 // Define TypeScript interfaces
@@ -77,7 +77,6 @@ const BlurText = ({
 }: BlurTextProps) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
-  const [key, setKey] = useState(0);
   const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -86,7 +85,6 @@ const BlurText = ({
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
-          setKey(prev => prev + 1);
           if (triggerOnce) {
             observer.unobserve(ref.current!);
           }

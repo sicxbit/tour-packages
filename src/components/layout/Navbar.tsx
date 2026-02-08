@@ -4,15 +4,9 @@ import { Menu, X } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const NAV_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "Packages", href: "/packages" },
-  { label: "About", href: "/about" },
-  { label: "Login", href: "/login" },
-  { label: "Register", href: "/register" },
-] as const;
+import { mainNavItems } from "@/lib/nav";
 
 function isActiveRoute(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -39,7 +33,7 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-2 rounded-full border border-gray-300/70 bg-white/60 p-2 backdrop-blur-xl">
-          {NAV_ITEMS.map((item) => {
+          {mainNavItems.map((item) => {
             const isActive = !!pathname && isActiveRoute(pathname, item.href);
             return (
               <Link
@@ -69,7 +63,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden mx-4 mb-4 rounded-2xl border border-gray-200 bg-white/90 p-3 backdrop-blur-xl">
           <div className="flex flex-col gap-2">
-            {NAV_ITEMS.map((item) => {
+            {mainNavItems.map((item) => {
               const isActive = !!pathname && isActiveRoute(pathname, item.href);
               return (
                 <Link key={item.href} href={item.href} className="relative rounded-xl px-4 py-2 font-medium text-gray-800" onClick={() => setMenuOpen(false)}>

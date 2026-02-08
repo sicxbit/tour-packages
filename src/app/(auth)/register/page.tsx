@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function RegisterPage() {
         throw new Error(data.error || "Registration failed");
       }
 
-      setSuccess("Registration successful. Please login.");
+      setSuccess("Thanks for registering! Please log in.");
       setTimeout(() => router.push("/login"), 800);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Registration failed");
@@ -67,7 +68,7 @@ export default function RegisterPage() {
             </button>
           </form>
 
-          <p className="text-center text-gray-700 mt-8">Already have account? <a href="/login" className="font-semibold text-gray-900 hover:text-yellow-400">Login</a></p>
+          <p className="text-center text-gray-700 mt-8">Already have an account? <Link href="/login" className="font-semibold text-gray-900 hover:text-yellow-400">Login</Link></p>
         </div>
 
         <div className="hidden lg:block">

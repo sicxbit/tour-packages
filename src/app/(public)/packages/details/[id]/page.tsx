@@ -1,9 +1,16 @@
+import Link from "next/link";
+
+import TourPackageDetail from "../../TourPackageDetails";
 import { prisma } from "@/lib/prisma";
 import { mapTourToPackage } from "@/lib/tours";
-import TourPackageDetail from "../../TourPackageDetails";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateStaticParams() {
+  const tours = await prisma.tour.findMany({ select: { id: true } });
+  return tours.map((tour) => ({ id: tour.id }));
 }
 
 export default async function Page({ params }: PageProps) {
@@ -16,9 +23,9 @@ export default async function Page({ params }: PageProps) {
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Tour Not Found</h1>
           <p className="text-gray-600 mb-4">The tour you&apos;re looking for doesn&apos;t exist.</p>
-          <a href="/packages" className="text-blue-600 hover:underline">
+          <Link href="/packages" className="text-blue-600 hover:underline">
             Back to Tours
-          </a>
+          </Link>
         </div>
       </div>
     );
