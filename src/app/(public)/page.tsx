@@ -14,6 +14,11 @@ export default async function Home() {
     take: 6,
   });
 
+  const regularTours = await prisma.tour.findMany({
+    where: { isFeatured: false },
+    orderBy: { createdAt: "desc" },
+  });
+
   return (
     <div className="relative">
       <Image className="absolute inset-0 h-full w-full object-cover" alt="Background" src="/assets/imgs/banner/background_image 2.png" width={1440} height={1080} priority />
@@ -49,7 +54,7 @@ export default async function Home() {
       </div>
       <DiscoverSection />
       <FeaturedTours tours={featuredTours} />
-      <BookNowSection />
+      <BookNowSection tours={regularTours} />
       <AboutSection />
       <Footer />
     </div>
