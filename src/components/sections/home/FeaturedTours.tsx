@@ -4,10 +4,6 @@ import { Tour } from "@prisma/client";
 import Link from "next/link";
 
 export default function FeaturedTours({ tours }: { tours: Tour[] }) {
-  if (tours.length === 0) {
-    return null;
-  }
-
   return (
     <section className="bg-black py-16">
       <div className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32">
@@ -21,11 +17,15 @@ export default function FeaturedTours({ tours }: { tours: Tour[] }) {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {tours.map((tour) => (
-            <TourPackageCard key={tour.id} tour={mapTourToPackage(tour)} />
-          ))}
-        </div>
+        {tours.length === 0 ? (
+          <p className="text-sm text-white/70">No featured tours available right now.</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {tours.map((tour) => (
+              <TourPackageCard key={tour.id} tour={mapTourToPackage(tour)} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
