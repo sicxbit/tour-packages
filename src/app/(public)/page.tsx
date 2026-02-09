@@ -53,7 +53,6 @@ export default async function Home() {
         </section>
       </div>
       <DiscoverSection />
-      <FeaturedTours tours={featuredTours} />
       <BookNowSection tours={regularTours} />
       <AboutSection />
       <Footer />
