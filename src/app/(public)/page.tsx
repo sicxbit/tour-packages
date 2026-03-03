@@ -20,7 +20,6 @@ export default async function Home() {
   return (
     <div className="relative">
       <DiscoverSection />
-      <FeaturedTours tours={featuredTours} />
       <BookNowSection tours={regularTours} />
       <AboutSection />
       <Footer />
