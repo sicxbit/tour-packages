@@ -11,8 +11,8 @@ export default function Home() {
   const navigationItems = [
     { label: "Home", href: "/", active: true },
     { label: "Packages", href: "/packages", active: false },
-    { label: "About", href: "about", active: false },
-    { label: "Login", href: "login", active: false },
+    { label: "About", href: "/about", active: false },
+    { label: "Login", href: "/login", active: false },
   ];
 
   return (

@@ -135,7 +135,5 @@ export const tours: TourPackage[] = [
 ];
 
 export function getTourById(id: string): TourPackage | undefined {
-  console.log('Looking for tour with ID:', id);
-  console.log('Available tours:', tours.map(t => ({ id: t.id, title: t.title })));
   return tours.find((tour) => tour.id === id);
 }

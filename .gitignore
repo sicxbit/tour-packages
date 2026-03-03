@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+*.key
+*id_rsa*
+*id_ed25519*
+*.p12
+*.pfx
+Travel-Booking
+Travel-Booking.pub

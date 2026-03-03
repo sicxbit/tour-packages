@@ -12,24 +12,32 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setErrorMsg("");
 
     try {
-    //   const { error } = await supabase.auth.signInWithPassword({
-    //     email,
-    //     password,
-    //   });
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      if (error) throw error;
+      const data = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        const authError = data.error ?? "Invalid email or password";
+        throw new Error(authError);
+      }
 
       router.push("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Login failed");
+      setErrorMsg(err instanceof Error ? err.message : "Login failed");
     } finally {
       setLoading(false);
     }
@@ -84,9 +92,9 @@ export default function LoginPage() {
               </a>
             </div>
 
-            {error && (
+            {errorMsg && (
               <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
-                {error}
+                {errorMsg}
               </div>
             )}
 
