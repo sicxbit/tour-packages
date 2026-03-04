@@ -5,16 +5,20 @@ import { prisma } from "@/lib/prisma";
 import { mapTourToPackage } from "@/lib/tours";
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export async function generateStaticParams() {
-  const tours = await prisma.tour.findMany({ select: { id: true } });
-  return tours.map((tour) => ({ id: tour.id }));
+  try {
+    const tours = await prisma.tour.findMany({ select: { id: true } });
+    return tours.map((tour) => ({ id: tour.id }));
+  } catch {
+    return [];
+  }
 }
 
-export default async function Page({ params }: PageProps) {
-  const { id } = await params;
+export default async function Page({ params }: any) {
+  const { id } = (params as PageProps["params"]);
   const tour = await prisma.tour.findUnique({ where: { id } });
 
   if (!tour) {

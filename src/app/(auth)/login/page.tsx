@@ -57,7 +57,7 @@ export default function LoginPage() {
       const result = await signIn(normalizedEmail, password);
 
       if (!result.success) {
-        setErrorMessage(result.error);
+        setErrorMessage(result.error ?? "Login failed");
         return;
       }
 
