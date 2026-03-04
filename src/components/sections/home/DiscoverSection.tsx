@@ -4,16 +4,6 @@ import Link from "next/link";
 export default function DiscoverSection() {
   return (
     <section className="relative w-full overflow-hidden">
-      <Image
-        className="absolute inset-0 h-full w-full object-cover"
-        alt="Ocean shoreline background"
-        src="/assets/imgs/banner/background_image 2.png"
-        fill
-        sizes="100vw"
-        priority
-      />
-      <div className="absolute inset-0 bg-black/20" />
-
       <div className="relative z-10 container mx-auto px-6 py-20 sm:px-10 md:px-16 lg:px-24 xl:px-32">
         <div className="relative overflow-hidden rounded-3xl bg-black/20 p-10 sm:p-12 md:p-16">
           <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
