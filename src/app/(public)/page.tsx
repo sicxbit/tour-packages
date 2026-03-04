@@ -4,6 +4,7 @@ import BookNowSection from "@/components/sections/home/BookNow";
 import DiscoverSection from "@/components/sections/home/DiscoverSection";
 import FeaturedTours from "@/components/sections/home/FeaturedTours";
 import { prisma } from "@/lib/prisma";
+import Image from "next/image";
 
 export default async function Home() {
   const featuredTours = await prisma.tour.findMany({
@@ -19,10 +20,22 @@ export default async function Home() {
 
   return (
     <div className="relative">
-      <DiscoverSection />
-      <BookNowSection tours={regularTours} />
-      <AboutSection />
-      <Footer />
+      <Image
+        className="absolute inset-0 h-full w-full object-cover"
+        alt="Ocean shoreline background"
+        src="/assets/imgs/banner/background_image 2.png"
+        fill
+        sizes="100vw"
+        priority
+      />
+      <div className="absolute inset-0 bg-black/20" />
+
+      <div className="relative z-10">
+        <DiscoverSection />
+        <BookNowSection tours={regularTours} />
+        <AboutSection />
+        <Footer />
+      </div>
     </div>
   );
 }
